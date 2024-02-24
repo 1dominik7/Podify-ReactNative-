@@ -2,11 +2,12 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
     "dev": "tsnd --respawn -r tsconfig-paths/register --pretty --transpile-only ./src/index.ts",
     "build": "tsc && tsc-alias && npm run copy-images",
-    "copy-images": "copy -R src/mail/images dist/mail"
+    "copy-images": "copy -R src/mail/images dist/mail",
+    "start": "node ./dist"
   },
   "keywords": [],
   "author": "dominik",
@@ -21,6 +22,7 @@
     "express-async-errors": "^3.1.1",
     "formidable": "^3.5.1",
     "jsonwebtoken": "^9.0.2",
+    "mailtrap": "^3.3.0",
     "moment": "^2.30.1",
     "mongoose": "^8.1.0",
     "node-cron": "^3.0.3",
@@ -42,4 +44,3 @@
     "typescript": "^5.3.3"
   }
 }
-

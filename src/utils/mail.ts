@@ -19,7 +19,6 @@ export const sendVerificationMail = async (token: string, profile: Profile) => {
   const { name, email } = profile;
   
   const client = new MailtrapClient({
-    endpoint: ENDPOINT,
     token: MAILTRAP_TOKEN,
   });
 
@@ -92,7 +91,6 @@ export const sendForgetPasswordLink = async (options: Options) => {
   const { email, link } = options;
 
   const client = new MailtrapClient({
-    endpoint: ENDPOINT,
     token: MAILTRAP_TOKEN,
   });
 
@@ -144,7 +142,6 @@ export const sendPassResetSuccessEmail = async (
   email: string
 ) => {
   const client = new MailtrapClient({
-    endpoint: ENDPOINT,
     token: MAILTRAP_TOKEN,
   });
 

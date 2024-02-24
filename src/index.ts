@@ -31,6 +31,18 @@ app.use(errorHandler)
 
 const PORT = process.env.PORT || 8989
 
+app.get('/', (req,res) => {
+    res.json({
+        alive: true
+    })
+} )
+
+app.get('*', (req,res) => {
+    res.status(404).json({
+        error: "Not found!"
+    })
+} )
+
 app.listen(PORT, () => {
     console.log("Port is listening on port " + PORT)
 })

@@ -1,11 +1,9 @@
-import path from "path";
 import {
   AUTH_EMAIL,
   MAILTRAP_TOKEN,
   VERIFICATION_EMAIL,
 } from "#/utils/variables";
 import { MailtrapClient } from "mailtrap";
-import fs from "fs";
 
 const ENDPOINT = "https://send.api.mailtrap.io/";
 
@@ -31,13 +29,6 @@ export const sendVerificationMail = async (token: string, profile: Profile) => {
       email,
     },
   ];
-
-  const welcomeImage = fs.readFileSync(
-    path.join(__dirname, "../mail/welcome.png")
-  );
-
-  const logoImage = fs.readFileSync(path.join(__dirname, "../mail/logo.png"));
-
   // client
   //   .send({
   //     from: sender,

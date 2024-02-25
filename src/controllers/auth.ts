@@ -33,7 +33,11 @@ export const create: RequestHandler = async (req: CreateUser, res) => {
     token,
   });
 
-  sendVerificationMail(token, { name, email, userId: user._id.toString() });
+  await sendVerificationMail(token, {
+    name,
+    email,
+    userId: user._id.toString(),
+  });
 
   res.status(201).json({ user: { id: user._id, name, email } });
 };
@@ -116,7 +120,7 @@ export const generateForgetPasswordLink: RequestHandler = async (req, res) => {
 
   const resetLink = `${PASSWORD_RESET_LINK}?token=${token}&userId=${user._id}`;
 
-  sendForgetPasswordLink({ email: user.email, link: resetLink });
+  await sendForgetPasswordLink({ email: user.email, link: resetLink });
 
   res.json({ message: "Check you registered mail." });
 };
@@ -143,7 +147,7 @@ export const updatePassword: RequestHandler = async (req, res) => {
   await PasswordResetToken.findOneAndDelete({ owner: user._id });
   // send the success email
 
-  sendPassResetSuccessEmail(user.name, user.email);
+  await sendPassResetSuccessEmail(user.name, user.email);
   res.json({ message: "Password resets successfully." });
 };
 

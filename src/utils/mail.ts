@@ -69,7 +69,7 @@ export const sendVerificationMail = async (token: string, profile: Profile) => {
   //       }
   //     ]
   //   })
-  client
+  return client
     .send({
       from: sender,
       to: recipients,
@@ -101,7 +101,7 @@ export const sendForgetPasswordLink = async (options: Options) => {
     name: "Password Reset",
   };
 
-  client
+ return client
     .send({
       from: sender,
       to: [{ email }],
@@ -154,7 +154,7 @@ export const sendPassResetSuccessEmail = async (
     name: "Password Reset",
   };
 
-  client
+ return client
     .send({
       from: sender,
       to: [{ email }],

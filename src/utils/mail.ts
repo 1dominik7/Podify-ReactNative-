@@ -17,7 +17,7 @@ interface Profile {
 
 export const sendVerificationMail = async (token: string, profile: Profile) => {
   const { name, email } = profile;
-  
+
   const client = new MailtrapClient({
     token: MAILTRAP_TOKEN,
   });
@@ -69,15 +69,17 @@ export const sendVerificationMail = async (token: string, profile: Profile) => {
   //       }
   //     ]
   //   })
-  client.send({
-    from: sender,
-    to: recipients,
-    template_uuid: "5910b4e3-2f00-4216-a22c-b7deaa64fce8",
-    template_variables: {
-      user_name: name,
-      token,
-    },
-  });
+  client
+    .send({
+      from: sender,
+      to: recipients,
+      template_uuid: "5910b4e3-2f00-4216-a22c-b7deaa64fce8",
+      template_variables: {
+        user_name: name,
+        token,
+      },
+    })
+    .catch((err) => console.log("Mail issue:", err));
 };
 
 interface Options {
@@ -99,15 +101,17 @@ export const sendForgetPasswordLink = async (options: Options) => {
     name: "Password Reset",
   };
 
-  client.send({
-    from: sender,
-    to: [{ email }],
-    template_uuid: "95a9ef6c-8d30-42b8-aeae-ef34e9286ded",
-    template_variables: {
-      user_email: email,
-      pass_reset_link: link,
-    },
-  });
+  client
+    .send({
+      from: sender,
+      to: [{ email }],
+      template_uuid: "95a9ef6c-8d30-42b8-aeae-ef34e9286ded",
+      template_variables: {
+        user_email: email,
+        pass_reset_link: link,
+      },
+    })
+    .catch((err) => console.log("Mail issue:", err));
 
   // const message = `We just reveived a request that you forgot your password. No problem you can use the link below and create brand new password.`;
 
@@ -150,15 +154,17 @@ export const sendPassResetSuccessEmail = async (
     name: "Password Reset",
   };
 
-  client.send({
-    from: sender,
-    to: [{ email }],
-    template_uuid: "67dbf68c-40da-4184-beb7-e372ed11cffb",
-    template_variables: {
-      user_name: name,
-      user_email: email,
-    },
-  });
+  client
+    .send({
+      from: sender,
+      to: [{ email }],
+      template_uuid: "67dbf68c-40da-4184-beb7-e372ed11cffb",
+      template_variables: {
+        user_name: name,
+        user_email: email,
+      },
+    })
+    .catch((err) => console.log("Mail issue:", err));
 
   // const transport = generateMailTransporter();
 
